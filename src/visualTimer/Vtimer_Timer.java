@@ -50,6 +50,14 @@ public class Vtimer_Timer {
 	public void setCurrentCycleTime (int ct){
 		cycleTimes[currentCycleTimeIndex]=ct;
 	}
+	
+	public int[] getCycleTimes(){
+		return cycleTimes;
+	}
+	
+	public void setCycleTimes(int[] ct){
+		cycleTimes = ct;
+	}
 	/*
 	 * END GETTER AND SETTER
 	 */
@@ -71,10 +79,9 @@ public class Vtimer_Timer {
 	}
 	
 	private void timeStep(){
-		if (interval <= 0 || interval > cycleTimes[currentCycleTimeIndex]){
+		if (interval <= 0 || interval > cycleTimes[currentCycleTimeIndex]){	
+			currentCycleTimeIndex ++;
 			if (currentCycleTimeIndex >= cycleTimes.length){
-				currentCycleTimeIndex ++;
-			} else {
 				currentCycleTimeIndex = 0;
 			}
 			interval = cycleTimes[currentCycleTimeIndex];

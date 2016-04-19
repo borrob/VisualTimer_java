@@ -94,11 +94,19 @@ public class Vtimer_Visual extends JFrame {
 		settingsPanel.add(startStopButton);
 		
 		intervalTF = new JTextField();
-		intervalTF.setColumns(4);
+		intervalTF.setColumns(10);
 		intervalTF.setText(intervalText);
 		intervalTF.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				vt.vtt.setCurrentCycleTime(Integer.parseInt(intervalTF.getText())*1000);
+				String tf = intervalTF.getText();
+				String[] cycleTimes = tf.split(",");
+				int[] ct_int = new int[cycleTimes.length];
+				int i = 0;
+				for (String ct: cycleTimes){
+					ct_int[i]=Integer.parseInt(ct.trim())*1000;
+					i++;
+				}
+				vt.vtt.setCycleTimes(ct_int);
 			}
 		});
 		settingsPanel.add(intervalTF);
