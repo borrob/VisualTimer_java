@@ -98,7 +98,7 @@ public class Vtimer_Visual extends JFrame {
 		intervalTF.setText(intervalText);
 		intervalTF.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				vt.vtt.setPERIOD(Integer.parseInt(intervalTF.getText())*1000);
+				vt.vtt.setCurrentCycleTime(Integer.parseInt(intervalTF.getText())*1000);
 			}
 		});
 		settingsPanel.add(intervalTF);

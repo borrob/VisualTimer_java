@@ -7,46 +7,48 @@ public class Vtimer_Timer {
 	
 	private Timer timer;
 
-	private int DELAY = 0;
-	private int UPDATEINTERVAL = 1000;
-	private int PERIOD = 5000; //must be integer * UPDATEINTVERVAL
-	private int INTERVAL = PERIOD;
+	private int delay = 0;
+	private int updateInterval = 1000;
+	private int[] cycleTimes = new int[]{5000};
+	private int interval = cycleTimes[0];
+	private int currentCycleTimeIndex = 0;
+	;
 	
 	public boolean isRunning = false;
 	
 	/*
 	 * GETTER and SETTER
 	 */
-	public int getDELAY() {
-		return DELAY;
+	public int getDelay() {
+		return delay;
 	}
 
-	public void setDELAY(int dELAY) {
-		DELAY = dELAY;
+	public void setDelay(int d) {
+		delay = d;
 	}
 
-	public int getUPDATEINTERVAL() {
-		return UPDATEINTERVAL;
+	public int getupdateInterval() {
+		return updateInterval;
 	}
 
-	public void setUPDATEINTERVAL(int uPDATEINTERVAL) {
-		UPDATEINTERVAL = uPDATEINTERVAL;
+	public void setupdateInterval(int updateinterval) {
+		updateInterval = updateinterval;
 	}
 
-	public int getPERIOD() {
-		return PERIOD;
+	public int getInterval() {
+		return interval;
 	}
 
-	public void setPERIOD(int pERIOD) {
-		PERIOD = pERIOD;
+	public void setInterval(int iv) {
+		interval = iv;
 	}
-
-	public int getINTERVAL() {
-		return INTERVAL;
+	
+	public int getCurrentCycleTime(){
+		return cycleTimes[currentCycleTimeIndex];
 	}
-
-	public void setINTERVAL(int iNTERVAL) {
-		INTERVAL = iNTERVAL;
+	
+	public void setCurrentCycleTime (int ct){
+		cycleTimes[currentCycleTimeIndex]=ct;
 	}
 	/*
 	 * END GETTER AND SETTER
@@ -59,7 +61,7 @@ public class Vtimer_Timer {
 				timeStep();
 				vt.doUpdate();
 			}
-		}, this.DELAY, this.UPDATEINTERVAL);
+		}, this.delay, this.updateInterval);
 		isRunning=true;
 	}
 	
@@ -69,10 +71,15 @@ public class Vtimer_Timer {
 	}
 	
 	private void timeStep(){
-		if (INTERVAL <= 0 || INTERVAL > PERIOD){
-			INTERVAL = PERIOD;
+		if (interval <= 0 || interval > cycleTimes[currentCycleTimeIndex]){
+			if (currentCycleTimeIndex >= cycleTimes.length){
+				currentCycleTimeIndex ++;
+			} else {
+				currentCycleTimeIndex = 0;
+			}
+			interval = cycleTimes[currentCycleTimeIndex];
 		}
-		INTERVAL -= UPDATEINTERVAL;
+		interval -= updateInterval;
 	}
 	
 }
