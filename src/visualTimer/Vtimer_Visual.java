@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Vtimer_Visual2 extends JFrame {
+public class Vtimer_Visual extends JFrame {
 	
 	private static final long serialVersionUID = 6622423020958225467L;
 	

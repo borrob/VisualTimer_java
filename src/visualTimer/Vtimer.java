@@ -2,14 +2,14 @@ package visualTimer;
 
 public class Vtimer{	
 		
-	Vtimer_Visual2 vv;
+	Vtimer_Visual vv;
 	Vtimer_Timer vtt;
 	
 	public static void main(String[] args) {
 		
 		Vtimer vt = new Vtimer();
 		
-		vt.vv = new Vtimer_Visual2();
+		vt.vv = new Vtimer_Visual();
 		vt.vtt = new Vtimer_Timer();
 		
 		vt.vv.setLABEL(((Integer) (vt.vtt.getINTERVAL()/1000)).toString());
