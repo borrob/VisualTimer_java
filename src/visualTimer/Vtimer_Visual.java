@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,7 +19,7 @@ public class Vtimer_Visual extends JFrame {
 	private static final long serialVersionUID = 6622423020958225467L;
 	
 	private JFrame mainFrame;	
-	private int WINDOWWIDTH=400;
+	private int WINDOWWIDTH=500;
 	private int WINDOWHEIGHT=400;
 	
 	private JLabel label;
@@ -26,6 +27,7 @@ public class Vtimer_Visual extends JFrame {
 	private JPanel settingsPanel;
 	private JButton startStopButton;
 	private JTextField intervalTF;
+	private JCheckBox showCountdownCB;
 	
 	private String LABELTEXT = "";
 	private Boolean FLASH = false;
@@ -115,6 +117,11 @@ public class Vtimer_Visual extends JFrame {
 		intervalLabel.setText("seconds");
 		settingsPanel.add(intervalLabel);
 		
+		showCountdownCB = new JCheckBox();
+		showCountdownCB.setText("Show countdown");
+		showCountdownCB.setSelected(true);
+		settingsPanel.add(showCountdownCB);
+		
 		mainFrame.add(settingsPanel, BorderLayout.PAGE_END);
 		
 		mainFrame.setVisible(true);
@@ -126,5 +133,6 @@ public class Vtimer_Visual extends JFrame {
 			mainFrame.getContentPane().setBackground(Color.BLUE);
 		}
 		label.setText(LABELTEXT);
+		label.setVisible(showCountdownCB.isSelected());
 	}
 }
