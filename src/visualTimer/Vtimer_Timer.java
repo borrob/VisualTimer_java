@@ -4,37 +4,28 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Vtimer_Timer {
+	/*
+	 * Class: Vtimer_Timer
+	 * 
+	 * This class implements a countdown timer with the functionality to start,
+	 * stop and resume the timer. The countdown time is set with an integer
+	 * array (time in miliseconds). The timer counts these times down one by
+	 * one and starts with the first one after the last one is done.
+	 */
 	
 	private Timer timer;
 
 	private int delay = 0;
 	private int updateInterval = 1000;
 	private int[] cycleTimes = new int[]{5000};
-	private int interval = cycleTimes[0];
+	private int interval = cycleTimes[0]; //the interval is the time left over in the current cycleTime
 	private int currentCycleTimeIndex = 0;
-	;
 	
 	public boolean isRunning = false;
 	
 	/*
 	 * GETTER and SETTER
 	 */
-	public int getDelay() {
-		return delay;
-	}
-
-	public void setDelay(int d) {
-		delay = d;
-	}
-
-	public int getupdateInterval() {
-		return updateInterval;
-	}
-
-	public void setupdateInterval(int updateinterval) {
-		updateInterval = updateinterval;
-	}
-
 	public int getInterval() {
 		return interval;
 	}
@@ -43,20 +34,16 @@ public class Vtimer_Timer {
 		interval = iv;
 	}
 	
-	public int getCurrentCycleTime(){
-		return cycleTimes[currentCycleTimeIndex];
-	}
-	
-	public void setCurrentCycleTime (int ct){
-		cycleTimes[currentCycleTimeIndex]=ct;
-	}
-	
 	public int[] getCycleTimes(){
 		return cycleTimes;
 	}
 	
 	public void setCycleTimes(int[] ct){
 		cycleTimes = ct;
+	}
+	
+	public int getCurrentCycleTime(){
+		return cycleTimes[currentCycleTimeIndex];
 	}
 	/*
 	 * END GETTER AND SETTER
@@ -71,12 +58,16 @@ public class Vtimer_Timer {
 	
 	void resume(Vtimer vt){
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask(){
-			public void run(){
-				timeStep();
-				vt.doUpdate();
-			}
-		}, this.delay, this.updateInterval);
+		timer.scheduleAtFixedRate(
+			new TimerTask(){
+				public void run(){
+					timeStep();
+					vt.doUpdate();
+				}
+			},
+			this.delay,
+			this.updateInterval
+		);
 		isRunning=true;
 	}
 	
@@ -86,6 +77,11 @@ public class Vtimer_Timer {
 	}
 	
 	private void timeStep(){
+		/*
+		 * Helper method to update the time left over in the current run.
+		 * 
+		 * Reset interval to the next cycleTime.
+		 */
 		if (interval <= 0 || interval > cycleTimes[currentCycleTimeIndex]){	
 			currentCycleTimeIndex ++;
 			if (currentCycleTimeIndex >= cycleTimes.length){
@@ -94,6 +90,5 @@ public class Vtimer_Timer {
 			interval = cycleTimes[currentCycleTimeIndex];
 		}
 		interval -= updateInterval;
-	}
-	
+	}	
 }

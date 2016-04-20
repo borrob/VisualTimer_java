@@ -15,6 +15,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Vtimer_Visual extends JFrame {
+	/*
+	 * Class: Vtimer_Visual
+	 * 
+	 * This class visualises the timer application. The screen goes to green
+	 * when the timer runs out. Then it resets to red again. The user can
+	 * change the countdown settings, start/stop/resume the timer and choose if
+	 * the countdown is displayed or not.
+	 * 
+	 * The countdown settings should be either a single integer (countdown
+	 * time in seconds), or a comma-separated list of countdown times (times in
+	 * seconds). For example: 5,3,2,6,10
+	 * There can be spaces, but no other characters than numbers and commas.
+	 */
 	
 	private static final long serialVersionUID = 6622423020958225467L;
 	
@@ -30,9 +43,9 @@ public class Vtimer_Visual extends JFrame {
 	private JTextField intervalTF;
 	private JCheckBox showCountdownCB;
 	
-	private String LABELTEXT = "";
-	private Boolean FLASH = false;
-	private String intervalText = "";
+	private String LABELTEXT = ""; //the countdown in the middle of the screen
+	private Boolean FLASH = false; //countdown is reached
+	private String intervalText = ""; //the cycleTimes from the Vtimer_Timer class
 	
 	/*
 	 * GETTER and SETTER
@@ -65,6 +78,7 @@ public class Vtimer_Visual extends JFrame {
 	 */
 	
 	void init(Vtimer vt){
+		//create a new window, fill it with the items and show
 		mainFrame = new JFrame("Visual Timer");
 		mainFrame.setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,6 +102,7 @@ public class Vtimer_Visual extends JFrame {
 		resumeButton.setSize(100,25);
 		resumeButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				//resume clicked: resume the timer, hide resume button and change text on start/stop button 
 				vt.vtt.resume(vt);
 				resumeButton.setVisible(false);
 				startStopButton.setText("Stop timer");
@@ -98,6 +113,7 @@ public class Vtimer_Visual extends JFrame {
 		startStopButton.setSize(100,25);
 		startStopButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				//start/stop the timer and show/hide the resume button
 				if (vt.vtt.isRunning){
 					startStopButton.setText("Restart timer");
 					vt.vtt.stop();
@@ -117,12 +133,13 @@ public class Vtimer_Visual extends JFrame {
 		intervalTF.setText(intervalText);
 		intervalTF.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				//user enters a new (list of) cycleTimes
 				String tf = intervalTF.getText();
-				String[] cycleTimes = tf.split(",");
+				String[] cycleTimes = tf.split(","); //split at commas
 				int[] ct_int = new int[cycleTimes.length];
 				int i = 0;
 				for (String ct: cycleTimes){
-					ct_int[i]=Integer.parseInt(ct.trim())*1000;
+					ct_int[i]=Integer.parseInt(ct.trim())*1000; //trim ignores spaces, convert seconds to ms
 					i++;
 				}
 				vt.vtt.setCycleTimes(ct_int);
@@ -145,8 +162,13 @@ public class Vtimer_Visual extends JFrame {
 	}
 	
 	public void doPaint(){
-		mainFrame.getContentPane().setBackground(Color.RED);
+		/*
+		 * Helper method to repaint the screen with current settings and
+		 * variables.
+		 */
+		mainFrame.getContentPane().setBackground(Color.RED); //red unless timer goes of
 		if (FLASH){
+			//timer finished --> flash
 			mainFrame.getContentPane().setBackground(Color.GREEN);
 		}
 		label.setText(LABELTEXT);
