@@ -42,7 +42,7 @@ public class Vtimer_Visual extends JFrame {
 	}
 
 	public void setLABEL(String lABEL) {
-		LABELTEXT = lABEL;
+		LABELTEXT = ">" + lABEL + "<";
 	}
 
 	public Boolean getFLASH() {
@@ -74,7 +74,7 @@ public class Vtimer_Visual extends JFrame {
 		
 		label = new JLabel(LABELTEXT, JLabel.CENTER);
 		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Courier", Font.BOLD, 128)); //TODO: make font available as setting
+		label.setFont(new Font("Courier", Font.BOLD, 256)); //TODO: make font available as setting
 		mainFrame.add(label, BorderLayout.CENTER);
 		
 		settingsPanel = new JPanel();
