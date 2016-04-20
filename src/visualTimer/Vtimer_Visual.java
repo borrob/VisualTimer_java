@@ -147,7 +147,7 @@ public class Vtimer_Visual extends JFrame {
 	public void doPaint(){
 		mainFrame.getContentPane().setBackground(Color.RED);
 		if (FLASH){
-			mainFrame.getContentPane().setBackground(Color.BLUE);
+			mainFrame.getContentPane().setBackground(Color.GREEN);
 		}
 		label.setText(LABELTEXT);
 		label.setVisible(showCountdownCB.isSelected());
