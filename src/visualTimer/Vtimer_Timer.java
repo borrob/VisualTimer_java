@@ -63,8 +63,15 @@ public class Vtimer_Timer {
 	 */
 
 	void start(Vtimer vt){
+		currentCycleTimeIndex=0;
+		interval = cycleTimes[currentCycleTimeIndex];
+		
+		resume(vt);
+	}
+	
+	void resume(Vtimer vt){
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask(){ //todo take definition out of loop
+		timer.scheduleAtFixedRate(new TimerTask(){
 			public void run(){
 				timeStep();
 				vt.doUpdate();

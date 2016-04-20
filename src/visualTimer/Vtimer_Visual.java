@@ -19,13 +19,14 @@ public class Vtimer_Visual extends JFrame {
 	private static final long serialVersionUID = 6622423020958225467L;
 	
 	private JFrame mainFrame;	
-	private int WINDOWWIDTH=500;
+	private int WINDOWWIDTH=700;
 	private int WINDOWHEIGHT=400;
 	
 	private JLabel label;
 	
 	private JPanel settingsPanel;
 	private JButton startStopButton;
+	private JButton resumeButton;
 	private JTextField intervalTF;
 	private JCheckBox showCountdownCB;
 	
@@ -80,20 +81,36 @@ public class Vtimer_Visual extends JFrame {
 		settingsPanel.setLayout(new FlowLayout());
 		
 		startStopButton = new JButton("Stop timer");
+		resumeButton = new JButton("Resume timer");
+		
+		resumeButton.setVisible(false);
+		resumeButton.setHorizontalAlignment(JButton.CENTER);
+		resumeButton.setSize(100,25);
+		resumeButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				vt.vtt.resume(vt);
+				resumeButton.setVisible(false);
+				startStopButton.setText("Stop timer");
+			}
+		});
+		
 		startStopButton.setHorizontalAlignment(JButton.CENTER);
 		startStopButton.setSize(100,25);
 		startStopButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if (vt.vtt.isRunning){
-					startStopButton.setText("Start timer");
+					startStopButton.setText("Restart timer");
 					vt.vtt.stop();
+					resumeButton.setVisible(true);
 				} else {
 					startStopButton.setText("Stop timer");
 					vt.vtt.start(vt);
+					resumeButton.setVisible(false);
 				}
 			};
 		});
 		settingsPanel.add(startStopButton);
+		settingsPanel.add(resumeButton);
 		
 		intervalTF = new JTextField();
 		intervalTF.setColumns(10);
