@@ -27,8 +27,4 @@ public class Vtimer{
 		vv.doPaint();
 	}
 	
-	void stopTimer(){
-		vtt.stop();
-	}
-	
 }

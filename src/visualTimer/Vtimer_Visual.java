@@ -85,10 +85,10 @@ public class Vtimer_Visual extends JFrame {
 		startStopButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if (vt.vtt.isRunning){
-					startStopButton.setText("Stop timer");
-					vt.stopTimer();
-				} else {
 					startStopButton.setText("Start timer");
+					vt.vtt.stop();
+				} else {
+					startStopButton.setText("Stop timer");
 					vt.vtt.start(vt);
 				}
 			};
