@@ -1,5 +1,6 @@
 package visualTimer;
 
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,7 +10,7 @@ public class Vtimer_Timer {
 	 * 
 	 * This class implements a countdown timer with the functionality to start,
 	 * stop and resume the timer. The countdown time is set with an integer
-	 * array (time in miliseconds). The timer counts these times down one by
+	 * array (time in milliseconds). The timer counts these times down one by
 	 * one and starts with the first one after the last one is done.
 	 */
 	
@@ -90,5 +91,12 @@ public class Vtimer_Timer {
 			interval = cycleTimes[currentCycleTimeIndex];
 		}
 		interval -= updateInterval;
+	}
+
+	@Override
+	public String toString() {
+		return "Vtimer_Timer [timer=" + timer + ", delay=" + delay + ", updateInterval=" + updateInterval
+				+ ", cycleTimes=" + Arrays.toString(cycleTimes) + ", interval=" + interval + ", currentCycleTimeIndex="
+				+ currentCycleTimeIndex + ", isRunning=" + isRunning + "]";
 	}	
 }
